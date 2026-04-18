@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { GraduationCap, Facebook, Instagram, Twitter, Youtube, Mail, Phone, MapPin } from 'lucide-react';
+import { motion } from 'motion/react';
 
 export default function Footer() {
   return (
@@ -22,10 +23,25 @@ export default function Footer() {
               Empowering students with knowledge, character, and leadership skills since 1995. Zenith Public School is committed to academic excellence and holistic development.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="hover:text-primary transition-colors"><Facebook size={20} /></a>
-              <a href="#" className="hover:text-primary transition-colors"><Instagram size={20} /></a>
-              <a href="#" className="hover:text-primary transition-colors"><Twitter size={20} /></a>
-              <a href="#" className="hover:text-primary transition-colors"><Youtube size={20} /></a>
+              {[
+                { icon: Facebook, href: 'https://facebook.com/zenithpublicschool', label: 'Facebook' },
+                { icon: Instagram, href: 'https://instagram.com/zenithpublicschool', label: 'Instagram' },
+                { icon: Twitter, href: 'https://twitter.com/zenithschool', label: 'Twitter' },
+                { icon: Youtube, href: 'https://youtube.com/zenithpublicschool', label: 'YouTube' },
+              ].map((social) => (
+                <motion.a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ y: -3, scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 hover:bg-accent hover:text-white transition-colors border border-slate-700 shadow-sm"
+                  aria-label={social.label}
+                >
+                  <social.icon size={18} />
+                </motion.a>
+              ))}
             </div>
           </div>
 

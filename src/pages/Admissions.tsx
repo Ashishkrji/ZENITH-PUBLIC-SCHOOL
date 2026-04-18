@@ -103,6 +103,53 @@ export default function Admissions() {
               <InquiryForm />
             </div>
           </div>
+
+          {/* Academic Calendar Section */}
+          <div className="mt-24">
+            <h2 className="text-3xl font-extrabold mb-8 text-center">Admissions <span className="text-primary">Timeline 2026–27</span></h2>
+            <div className="overflow-hidden rounded-[16px] border border-border shadow-sm">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="bg-slate-50 border-b border-border">
+                    <th className="p-4 md:p-6 font-bold text-primary">Event</th>
+                    <th className="p-4 md:p-6 font-bold text-primary">Dates</th>
+                    <th className="p-4 md:p-6 font-bold text-primary">Remarks</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border">
+                  {[
+                    { event: 'Registration Opens', date: 'January 15, 2026', remarks: 'Online & at school office' },
+                    { event: 'Virtual Open House', date: 'February 5, 2026', remarks: 'Link will be sent via email' },
+                    { event: 'Interactions - Phase I', date: 'February 15–20, 2026', remarks: 'Grades Nursery to V' },
+                    { event: 'Entrance Exam - Phase I', date: 'February 22, 2026', remarks: 'Grades VI to IX' },
+                    { event: 'First List Announcement', date: 'March 1, 2026', remarks: 'Via Website & Email' },
+                    { event: 'Admission Formalities', date: 'March 2–10, 2026', remarks: 'Fee payment & document submission' },
+                    { event: 'Orientation Program', date: 'March 25, 2026', remarks: 'For new parents & students' },
+                    { event: 'New Session Begins', date: 'April 4, 2026', remarks: 'Academic Year 2026–27' },
+                  ].map((row, idx) => (
+                    <tr key={idx} className="hover:bg-slate-50/50 transition-colors">
+                      <td className="p-4 md:p-6 font-medium text-slate-900">{row.event}</td>
+                      <td className="p-4 md:p-6 text-slate-600">
+                        <div className="flex items-center gap-2">
+                          <CalendarDays size={16} className="text-accent" />
+                          {row.date}
+                        </div>
+                      </td>
+                      <td className="p-4 md:p-6 text-slate-500 text-sm italic">{row.remarks}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="mt-8 p-6 bg-accent/5 rounded-[12px] border border-accent/10 flex items-start gap-4">
+              <div className="bg-accent p-2 rounded-full text-white shrink-0">
+                <CheckCircle2 size={16} />
+              </div>
+              <p className="text-sm text-slate-600">
+                <span className="font-bold text-accent">Note:</span> Dates are subject to change. Please keep checking the website for updates or contact the admissions office for any clarifications.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
     </div>

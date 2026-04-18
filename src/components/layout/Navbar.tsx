@@ -82,41 +82,76 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile Nav */}
+      {/* Mobile Nav Drawer */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-t"
-          >
-            <div className="container-custom py-6 flex flex-col gap-4">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  to={link.href}
-                  className={cn(
-                    'text-lg font-medium py-2 border-b border-slate-100',
-                    location.pathname === link.href ? 'text-primary' : 'text-slate-600'
-                  )}
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsOpen(false)}
+              className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[60] md:hidden"
+            />
+            
+            {/* Drawer */}
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="fixed top-0 right-0 bottom-0 w-[300px] bg-white z-[70] md:hidden shadow-2xl flex flex-col"
+            >
+              {/* Header */}
+              <div className="h-20 flex items-center justify-between px-6 border-b">
+                <span className="font-sans font-extrabold text-lg text-primary">NAVIGATION</span>
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="p-2 rounded-full hover:bg-slate-100 text-slate-500 transition-colors"
+                  aria-label="Close menu"
                 >
-                  {link.name}
-                </Link>
-              ))}
-              <div className="flex flex-col gap-4 pt-4">
-                <Button asChild className="w-full bg-primary">
+                  <X size={24} />
+                </button>
+              </div>
+
+              {/* Links */}
+              <div className="flex-grow overflow-y-auto py-8 px-6 flex flex-col gap-2">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    className={cn(
+                      'text-xl font-bold py-3 transition-colors flex items-center justify-between group',
+                      location.pathname === link.href ? 'text-primary' : 'text-slate-600 hover:text-primary'
+                    )}
+                  >
+                    {link.name}
+                    <motion.span
+                      initial={{ opacity: 0, x: -10 }}
+                      whileHover={{ opacity: 1, x: 0 }}
+                      className="text-primary"
+                    >
+                      →
+                    </motion.span>
+                  </Link>
+                ))}
+              </div>
+
+              {/* Footer */}
+              <div className="p-6 border-t bg-slate-50">
+                <Button asChild className="w-full bg-accent hover:bg-accent/90 text-white h-12 rounded-[6px] font-bold uppercase tracking-wide">
                   <Link to="/admissions">Apply Now</Link>
                 </Button>
                 <a
                   href="tel:+919876543210"
-                  className="flex items-center justify-center gap-2 text-primary font-bold py-2"
+                  className="mt-6 flex items-center justify-center gap-2 text-primary font-bold"
                 >
                   <Phone size={18} /> +91 98765 43210
                 </a>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </nav>

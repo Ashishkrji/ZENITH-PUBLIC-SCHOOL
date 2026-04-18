@@ -9,12 +9,12 @@ import AdmissionCTA from '@/components/home/AdmissionCTA';
 export default function Home() {
   return (
     <>
-      <Hero />
+      <section id="hero"><Hero /></section>
       <Stats />
-      <WhyChooseUs />
-      <Programs />
-      <FacilitiesPreview />
-      <Testimonials />
+      <section id="why-choose-us"><WhyChooseUs /></section>
+      <section id="programs"><Programs /></section>
+      <section id="facilities"><FacilitiesPreview /></section>
+      <section id="testimonials"><Testimonials /></section>
       <AdmissionCTA />
     </>
   );
